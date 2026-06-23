@@ -1,0 +1,118 @@
+:root {
+  /* Colors - Dark Theme (Default) */
+  --bg-primary: #060913;
+  --bg-secondary: #0c1122;
+  --bg-tertiary: #131a35;
+  --bg-card: rgba(13, 20, 38, 0.5);
+  --bg-card-hover: rgba(20, 30, 58, 0.7);
+  
+  --bg-navbar: rgba(6, 9, 19, 0.7);
+  --bg-navbar-scrolled: rgba(6, 9, 19, 0.85);
+  --bg-navbar-mobile: rgba(6, 9, 19, 0.95);
+  
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-color-hover: rgba(0, 242, 254, 0.25);
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #a3aed0;
+  --text-muted: #64748b;
+  --text-header: #ffffff;
+  --btn-text-primary: #060913;
+  
+  /* Gradients */
+  --grad-cyan-blue: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --grad-purple-pink: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  --grad-dark: linear-gradient(180deg, #060913 0%, #0c1122 100%);
+  --grad-neon-accent: linear-gradient(135deg, #8a2be2 0%, #00f2fe 100%);
+  --grad-glow-purple: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(0, 242, 254, 0.05) 100%);
+  
+  /* Accent Hexes for raw usage */
+  --clr-cyan: #00f2fe;
+  --clr-blue: #4facfe;
+  --clr-purple: #8a2be2;
+  --clr-pink: #fbc2eb;
+  
+  /* Shadows & Glows */
+  --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.7);
+  --glow-cyan: 0 0 15px rgba(0, 242, 254, 0.3);
+  --glow-purple: 0 0 15px rgba(138, 43, 226, 0.3);
+  --glow-border: inset 0 0 12px rgba(255, 255, 255, 0.03);
+  
+  /* Typography - Both Lora (Body) and Playfair Display (Headers) are modern serifs */
+  --font-sans: var(--font-lora), Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 70px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 14px;
+  --border-radius-lg: 24px;
+}
+
+/* Light Theme Variables */
+[data-theme='light'] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  
+  --bg-navbar: rgba(248, 250, 252, 0.7);
+  --bg-navbar-scrolled: rgba(241, 245, 249, 0.85);
+  --bg-navbar-mobile: rgba(241, 245, 249, 0.95);
+  
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-color-hover: rgba(8, 145, 178, 0.35);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-header: #0f172a;
+  --btn-text-primary: #ffffff;
+  
+  /* Accent Hexes - Darker/High-Contrast for light background */
+  --clr-cyan: #0891b2;
+  --clr-blue: #1d4ed8;
+  --clr-purple: #6d28d9;
+  --clr-pink: #be185d;
+
+  /* Gradients - Darker/High-Contrast */
+  --grad-cyan-blue: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
+  --grad-purple-pink: linear-gradient(135deg, #6d28d9 0%, #be185d 100%);
+  --grad-neon-accent: linear-gradient(135deg, #6d28d9 0%, #0891b2 100%);
+  --grad-glow-purple: linear-gradient(135deg, rgba(109, 40, 217, 0.08) 0%, rgba(8, 145, 178, 0.03) 100%);
+  
+  /* Shadows & Glows overrides for light background */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 15px -3px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.12);
+  --glow-cyan: 0 0 15px rgba(8, 145, 178, 0.15);
+  --glow-purple: 0 0 15px rgba(109, 40, 217, 0.15);
+  --glow-border: inset 0 0 12px rgba(15, 23, 42, 0.02);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes border-slide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
