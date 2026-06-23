@@ -92,7 +92,7 @@ export default function HeroVisual() {
   }, []);
 
   return (
-    <div style={{ width: '100%', maxWidth: '420px', margin: '0 auto' }}>
+    <div style={{ width: '100%', maxWidth: '520px', margin: '0 auto' }}>
       <svg 
         viewBox="0 0 440 360" 
         style={{ width: '100%', height: 'auto', overflow: 'visible' }}
@@ -137,10 +137,10 @@ export default function HeroVisual() {
             }
             .node-label {
               font-family: var(--font-sans);
-              font-size: 8px;
+              font-size: 11px;
               font-weight: 600;
               fill: var(--text-secondary);
-              opacity: 0.5;
+              opacity: 0.7;
               transition: opacity 0.2s, fill 0.2s, font-size 0.2s;
               text-anchor: middle;
             }
@@ -238,12 +238,12 @@ export default function HeroVisual() {
                 />
                 <text
                   x={node.x}
-                  y={node.y - 12}
+                  y={node.y - 14}
                   className="node-label"
                   style={{
-                    opacity: isHovered ? 1 : 0.5,
+                    opacity: isHovered ? 1 : 0.7,
                     fill: isHovered ? 'var(--text-header)' : 'var(--text-secondary)',
-                    fontSize: isHovered ? '9px' : '8px'
+                    fontSize: isHovered ? '12px' : '11px'
                   }}
                 >
                   {node.label}

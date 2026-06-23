@@ -1239,15 +1239,24 @@ Using Adzuna for search and Jina for embeddings, the job hunter was evaluated on
       { id: "extractor", label: "Resume Extractor Agent", type: "process" },
       { id: "jina", label: "Jina Embeddings", type: "process" },
       { id: "pinecone", label: "Pinecone Vector DB", type: "database" },
-      { id: "agent_orchestrator", label: "FastAPI Orchestrator", type: "process" },
+      { id: "agent_orchestrator", label: "LangGraph Orchestrator", type: "process" },
+      { id: "gap_agent", label: "Gap Analysis Agent", type: "model" },
+      { id: "research_agent", label: "Deep Researcher Agent", type: "model" },
+      { id: "job_agent", label: "Job Hunter Agent", type: "model" },
       { id: "ui", label: "React UI Dashboard", type: "output" }
     ],
     architectureLinks: [
       { source: "pdf", target: "extractor", label: "PyMuPDF" },
-      { source: "extractor", target: "jina", label: "Profile Text" },
-      { source: "jina", target: "pinecone", label: "Upsert / Query" },
-      { source: "pinecone", target: "agent_orchestrator", label: "Job matches" },
-      { source: "agent_orchestrator", target: "ui" }
+      { source: "extractor", target: "jina", label: "Profile" },
+      { source: "extractor", target: "agent_orchestrator", label: "Context" },
+      { source: "jina", target: "pinecone", label: "Embeddings" },
+      { source: "pinecone", target: "agent_orchestrator", label: "Query" },
+      { source: "agent_orchestrator", target: "gap_agent", label: "Analyze" },
+      { source: "agent_orchestrator", target: "research_agent", label: "Research" },
+      { source: "agent_orchestrator", target: "job_agent", label: "Search" },
+      { source: "gap_agent", target: "ui", label: "Gaps" },
+      { source: "research_agent", target: "ui", label: "Roadmaps" },
+      { source: "job_agent", target: "ui", label: "Jobs" }
     ]
   },
   {
@@ -1591,15 +1600,18 @@ Use **Quick Demo** (\`demo / demo\`) or **Quick Admin** (\`admin / admin\`) for 
       { id: "yolo", label: "YOLOv8-OBB (Cattle Isolator)", type: "model" },
       { id: "resnet", label: "ResNet18 (Embeddings)", type: "model" },
       { id: "telemetry", label: "Collar IoT Telemetry", type: "input" },
-      { id: "classifier", label: "Dual ML Models (XGB/LGB)", type: "model" },
-      { id: "api", label: "Flask API & SQLite", type: "process" }
+      { id: "classifier", label: "Stacked ML Classifier (XGB/LGB)", type: "model" },
+      { id: "api", label: "Flask API & SQLite", type: "process" },
+      { id: "ui", label: "Jinja2 & Chart.js Dashboard", type: "output" }
     ],
     architectureLinks: [
       { source: "cam", target: "yolo" },
       { source: "yolo", target: "resnet", label: "Crops" },
-      { source: "resnet", target: "classifier", label: "Embeds" },
-      { source: "telemetry", target: "api" },
-      { source: "classifier", target: "api", label: "Prediction" }
+      { source: "resnet", target: "classifier", label: "CNN Embeds" },
+      { source: "telemetry", target: "classifier", label: "Vitals" },
+      { source: "telemetry", target: "api", label: "Sync" },
+      { source: "classifier", target: "api", label: "Prediction" },
+      { source: "api", target: "ui", label: "Render" }
     ]
   },
   {
@@ -1775,16 +1787,16 @@ Mines comment sentences matching aspect dictionaries to evaluate specific featur
       { id: "net", label: "NetworkX Community Graph", type: "process" },
       { id: "sent", label: "Aspect Sentiment (NLTK)", type: "model" },
       { id: "ts", label: "ARIMA Forecaster", type: "model" },
-      { id: "pdf", label: "ReportLab PDF Engine", type: "output" }
+      { id: "dashboard", label: "Flask Dashboard & PDF", type: "output" }
     ],
     architectureLinks: [
       { source: "api", target: "db" },
       { source: "db", target: "net" },
       { source: "db", target: "sent" },
       { source: "db", target: "ts" },
-      { source: "net", target: "pdf" },
-      { source: "sent", target: "pdf" },
-      { source: "ts", target: "pdf" }
+      { source: "net", target: "dashboard" },
+      { source: "sent", target: "dashboard" },
+      { source: "ts", target: "dashboard" }
     ]
   },
   {
@@ -1929,19 +1941,19 @@ This project is released under the **MIT License** and is intended for education
 `,
     architectureNodes: [
       { id: "raw", label: "Session Clickstream Data", type: "input" },
-      { id: "fe", label: "Yeo-Johnson & KNN Eng", type: "process" },
-      { id: "clf", label: "Stage 1: XGBoost (Convert?)", type: "model" },
-      { id: "reg", label: "Stage 2: LightGBM (Value?)", type: "model" },
+      { id: "fe", label: "Preprocessing & Stacking", type: "process" },
+      { id: "clf", label: "Stage 1: LGBM Classifier", type: "model" },
+      { id: "reg", label: "Stage 2: Voting Regressors", type: "model" },
       { id: "blend", label: "Expected Value Product", type: "process" },
-      { id: "out", label: "Final Transaction Forecast", type: "output" }
+      { id: "dashboard", label: "Flask Interpretability Dashboard", type: "output" }
     ],
     architectureLinks: [
       { source: "raw", target: "fe" },
       { source: "fe", target: "clf" },
       { source: "fe", target: "reg" },
-      { source: "clf", target: "blend", label: "P(Convert)" },
+      { source: "clf", target: "blend", label: "P(Buy)" },
       { source: "reg", target: "blend", label: "Value" },
-      { source: "blend", target: "out" }
+      { source: "blend", target: "dashboard", label: "Inference" }
     ]
   },
   {
@@ -1975,18 +1987,25 @@ Developed for the **IIT Madras Business Data Management Capstone**, this project
    - Recommended new shipping Standard Operating Procedures (SOPs), standardized boxes, and carrier-control guidelines to minimize transit damages.`,
     architectureNodes: [
       { id: "invoices", label: "Messy FY22-FY25 Invoices", type: "input" },
+      { id: "purchase", label: "Purchase & Import Logs", type: "input" },
+      { id: "volumetric", label: "On-Site Rack Measurements", type: "input" },
       { id: "audit", label: "GST BOE Cross-Auditing", type: "process" },
       { id: "abc", label: "ABC/XYZ Matrix Solver", type: "process" },
-      { id: "forecast", label: "ARIMA & LightGBM Demand", type: "model" },
+      { id: "forecast", label: "ARIMA & LGBM Demand", type: "model" },
+      { id: "rca", label: "Fishbone Root Cause Analysis", type: "process" },
       { id: "eoq", label: "EOQ / ROP Formula Engine", type: "process" },
-      { id: "recs", label: "Capital & SOP Recs", type: "output" }
+      { id: "recs", label: "SOP & Capital Recommendations", type: "output" }
     ],
     architectureLinks: [
       { source: "invoices", target: "audit" },
+      { source: "purchase", target: "audit" },
+      { source: "volumetric", target: "rca" },
       { source: "audit", target: "abc" },
-      { source: "abc", target: "forecast", label: "Volatility" },
-      { source: "forecast", target: "eoq" },
-      { source: "eoq", target: "recs" }
+      { source: "audit", target: "forecast" },
+      { source: "abc", target: "eoq", label: "Classes" },
+      { source: "forecast", target: "eoq", label: "Demand" },
+      { source: "eoq", target: "recs", label: "SOPs/Stock" },
+      { source: "rca", target: "recs", label: "Logistics" }
     ]
   }
 ];

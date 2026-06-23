@@ -240,3 +240,8 @@ a {
     font-size: 1.75rem;
   }
 }
+
+@keyframes typingBlink {
+  from, to { border-color: transparent }
+  50% { border-color: var(--clr-cyan); }
+}

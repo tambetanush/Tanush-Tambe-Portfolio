@@ -22,6 +22,8 @@ import {
     achievementList,
 } from "@/data/resumeData";
 import HeroVisual from "@/components/HeroVisual";
+import TypingCarousel from "@/components/TypingCarousel";
+import HeroGridBg from "@/components/HeroGridBg";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -52,6 +54,7 @@ export default function Home() {
         <div className="container">
             {/* Hero Section */}
             <section className={styles.hero}>
+                <HeroGridBg />
                 <div className={styles.heroContent}>
                     <div className={styles.heroTag}>
                         <Terminal size={14} />
@@ -64,8 +67,12 @@ export default function Home() {
                         </span>
                     </h1>
                     <p className={styles.heroSub}>
-                        Hi, I&apos;m <strong>{personalInfo.name}</strong>. I
-                        design, deploy, and evaluate production-grade machine
+                        Hi, I&apos;m <strong>{personalInfo.name}</strong>. I am a{" "}
+                        <span className="gradient-text" style={{ fontWeight: 700 }}>
+                            <TypingCarousel />
+                        </span>
+                        <br />
+                        I design, deploy, and evaluate production-grade machine
                         learning pipelines, custom fine-tuned LLMs, and
                         high-performance algorithms.
                     </p>

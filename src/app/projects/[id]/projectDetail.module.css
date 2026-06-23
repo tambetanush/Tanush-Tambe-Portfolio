@@ -223,21 +223,22 @@
   background: var(--bg-secondary);
 }
 
-/* Sidebar / Diagram */
-.sidebar {
-  display: flex;
-  flex-direction: column;
+/* Top Section & Cards */
+.topSection {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
   gap: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-.sidebarCard {
+.topCard {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.sidebarTitle {
+.topCardTitle {
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--text-header);
@@ -245,6 +246,12 @@
   padding-bottom: 0.5rem;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.techBadges {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -266,16 +273,43 @@
 .svgNode {
   cursor: pointer;
   transition: transform var(--transition-fast);
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .svgNode:hover {
-  transform: scale(1.02);
+  transform: scale(1.04);
+}
+
+.svgNode rect {
+  transition: stroke var(--transition-fast), fill var(--transition-fast), filter var(--transition-fast);
+}
+
+.svgNode:hover rect {
+  stroke: var(--clr-cyan);
+  filter: drop-shadow(0 0 6px var(--clr-cyan));
+}
+
+.flowPacket {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 8 40;
+  stroke-dashoffset: 48;
+  animation: projectFlow 3s linear infinite;
+  opacity: 0.65;
+  filter: drop-shadow(0 0 4px var(--clr-cyan));
+}
+
+@keyframes projectFlow {
+  to {
+    stroke-dashoffset: -48;
+  }
 }
 
 @media (max-width: 1024px) {
-  .layout {
+  .topSection {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 }
 
@@ -293,3 +327,4 @@
     align-items: stretch;
   }
 }
+
